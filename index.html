@@ -132,8 +132,8 @@ button{font:inherit;color:inherit;cursor:pointer}
 [data-undo]{display:flex;justify-content:center;width:100%}
 
 /* A: option cards */
-.opts{display:grid;gap:10px}
-.opt{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 12px;align-items:center;text-align:left;background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:14px}
+.opts{display:grid;gap:8px}
+.opt{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:1px 10px;align-items:center;text-align:left;background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:10px 12px}
 .opt{transition:opacity .25s,filter .25s}
 .or{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
 .or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
@@ -145,7 +145,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 .opt-sub{display:block;color:var(--muted);font-size:13px}
 .opt-out{text-align:right;font-variant-numeric:tabular-nums}
 .opt-out b{display:block;font-size:17px}.opt-out small{color:var(--muted);font-size:12px}
-.perk{grid-column:2/4;font-size:12px;color:var(--ok);font-weight:600}
+.perk{grid-column:2;grid-row:2;font-size:12px;color:var(--ok);font-weight:600}
+.opt .radio{grid-row:1/3}
+.opt-out{grid-column:3;grid-row:1/3}
 
 /* B: hero */
 .hero{background:var(--card);border:1.5px solid var(--accent);border-radius:20px;padding:18px;display:grid;gap:6px;justify-items:start}
@@ -256,7 +258,7 @@ pre code{background:none;padding:0}
   .panel h2{font-size:18px}
   .gap{padding:12px;gap:12px}
   .gap-n strong{font-size:18px}
-  .opt{padding:11px 12px}
+  .opt{padding:10px 12px}
   .cta{min-height:48px;padding:12px 18px}
   .talk summary,.more summary{padding:13px 0}
   .talk{margin-top:0}
