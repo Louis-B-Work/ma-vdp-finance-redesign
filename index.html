@@ -37,9 +37,10 @@ button{font:inherit;color:inherit;cursor:pointer}
 .seg{display:flex;flex-wrap:wrap;gap:6px}
 .seg button{border:1px solid var(--line);background:transparent;border-radius:999px;padding:7px 14px;font-size:13px;font-weight:600;color:var(--muted)}
 .seg button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
-.menu-btn{display:none;position:fixed;top:12px;right:12px;z-index:25;width:44px;height:44px;border-radius:50%;border:0;background:var(--surface);color:var(--ink);box-shadow:var(--shadow);place-items:center;cursor:pointer}
+.menu-btn{display:none;position:fixed;top:6px;right:max(12px,env(safe-area-inset-right,0px));z-index:25;width:44px;height:44px;padding:0;justify-content:center;border-radius:50%;border:0;background:var(--accent);color:var(--on-accent);box-shadow:0 4px 12px rgba(105,5,242,.4);align-items:center;gap:10px;font-weight:700;font-size:16px;cursor:pointer}
+.menu-note{display:none;margin:0;color:var(--muted);font-size:14px}
 .menu-head{display:none}
-.reset{margin-left:auto;border:0;background:none;color:var(--accent);font-weight:600;font-size:13px;text-decoration:underline;padding:6px}
+.reset{margin-left:auto;border:0;background:none;color:var(--accent);font-weight:600;font-size:13px;text-decoration:underline;padding:6px;min-height:44px}
 
 .stage{display:grid;justify-items:center;gap:28px}
 
@@ -48,7 +49,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--line);font-weight:600}
 .topbar .l,.topbar .r{display:flex;align-items:center;gap:8px}
 .topbar .r{gap:16px}
-.photo{height:240px;background:#6b6779 var(--car) 0 0/100% auto no-repeat;position:relative}
+.photo{height:228px;background:#6b6779 var(--car) 0 0/100% auto no-repeat;position:relative}
 .count{position:absolute;right:12px;bottom:12px;background:rgba(20,18,30,.7);color:#fff;border-radius:999px;padding:4px 10px;font-size:12px;display:flex;gap:6px;align-items:center}
 .thumbs{display:flex;gap:8px;padding:10px 16px;overflow:hidden}
 .thumbs i{flex:0 0 64px;height:48px;border-radius:6px;background:#6b6779 var(--car) no-repeat}
@@ -89,6 +90,8 @@ button{font:inherit;color:inherit;cursor:pointer}
 .gap-n small{display:block;color:var(--muted);font-size:12px}
 .gap-n strong{font-size:20px;letter-spacing:-.01em}
 .gap-n .r{text-align:right}
+.gap.multi .gap-row + .gap-row{border-top:1px solid var(--line);padding-top:16px}
+.gap-one{font-size:15px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
 .gap-bar{height:8px;border-radius:999px;background:var(--line);overflow:hidden}
 .gap-bar i{display:block;height:100%;border-radius:999px;background:var(--warn);transition:width .35s ease,background .35s ease}
 .gap-bar i.on{background:var(--green)}
@@ -110,14 +113,14 @@ button{font:inherit;color:inherit;cursor:pointer}
 .car-row::-webkit-scrollbar{display:none}
 .vcard{flex:0 0 150px;scroll-snap-align:start;scroll-margin-left:16px;text-align:left;padding:0;border:1px solid var(--line);background:var(--card);border-radius:12px;overflow:hidden;display:grid;align-content:start}
 .vimg{display:block;position:relative;background-color:#d9d6e2;background-image:var(--cars);background-repeat:no-repeat}
-.vtag{position:absolute;left:8px;top:8px;background:var(--card);color:var(--accent);font-size:11px;font-weight:700;border-radius:999px;padding:3px 8px}
+.vtag{position:absolute;left:8px;top:8px;background:var(--card);color:var(--accent);font-size:12px;font-weight:700;border-radius:999px;padding:3px 8px}
 .vheart{position:absolute;right:8px;top:8px;width:28px;height:28px;border-radius:50%;background:var(--card);display:grid;place-items:center}
 .vb{display:grid;gap:2px;padding:10px 10px 12px}
 .vb b{font-size:13px;line-height:1.25}
-.vb small{color:var(--muted);font-size:11.5px;line-height:1.3}
-.vp{margin-top:6px;font-size:12px;color:var(--muted)}
-.vp strong{color:var(--accent);font-size:14px}
-.kicker{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.vb small{color:var(--muted);font-size:12.5px;line-height:1.3}
+.vp{margin-top:6px;font-size:13px;color:var(--muted)}
+.vp strong{color:var(--accent);font-size:15px}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 
 .cta{width:100%;border:0;border-radius:999px;background:var(--green);color:var(--on-green);font-weight:700;font-size:16px;padding:15px 18px;min-height:52px;display:flex;justify-content:center;align-items:center;gap:10px}
 .cta:disabled{background:var(--line);color:var(--muted);cursor:not-allowed}
@@ -125,7 +128,8 @@ button{font:inherit;color:inherit;cursor:pointer}
 .spin{width:16px;height:16px;border-radius:50%;border:2px solid currentColor;border-right-color:transparent;animation:sp .7s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
 .ghost{width:100%;border:1.5px solid var(--accent);background:transparent;color:var(--accent);border-radius:999px;font-weight:700;padding:13px 16px;display:flex;gap:8px;justify-content:center;align-items:center}
-.link{border:0;background:none;color:var(--accent);font-weight:600;text-decoration:underline;padding:6px 0;text-align:left;font-size:14px}
+.link{border:0;background:none;color:var(--accent);font-weight:600;text-decoration:underline;padding:6px 0;text-align:left;font-size:14px;min-height:44px;display:inline-flex;align-items:center}
+[data-undo]{display:flex;justify-content:center;width:100%}
 
 /* A: option cards */
 .opts{display:grid;gap:10px}
@@ -218,15 +222,20 @@ pre code{background:none;padding:0}
 /* Phone: full-screen design with the controls in a menu */
 @media (max-width:640px){
   body{padding:0;padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
-  .wrap{max-width:none;gap:0}
-  .stage{gap:0;justify-items:stretch}
-  .phone{max-width:none;width:100%;border:0;border-radius:0;box-shadow:none;min-height:100dvh}
+  .wrap{max-width:none;gap:0;grid-template-columns:minmax(0,1fr)}
+  .stage{gap:0;justify-items:stretch;grid-template-columns:minmax(0,1fr)}
+  .phone{max-width:none;width:100%;border:0;border-radius:0;box-shadow:none;min-height:100dvh;min-width:0;overflow:visible}
   .side{display:none}
-  .menu-btn{display:grid}
+  .menu-btn{display:flex}
+  body.menu-open .menu-btn{display:none}
+  .menu-note{display:block}
+  .topbar{position:sticky;top:0;z-index:20;background:var(--surface);padding-right:68px}
+  .bar-label{font-size:12px}
+  .seg button,.menu-head button{min-height:44px}
   .bar{display:none;position:fixed;inset:0;z-index:30;border:0;border-radius:0;padding:20px;align-content:start;background:var(--surface);overflow:auto}
   body.menu-open .bar{display:grid}
   .menu-head{display:flex;justify-content:space-between;align-items:center;font-size:18px;font-weight:800}
-  .menu-head button{border:0;background:none;color:var(--accent);font-weight:700;font-size:15px;padding:8px}
+  .menu-head button{border:0;background:var(--accent);color:var(--on-accent);font-weight:700;font-size:15px;padding:10px 22px;border-radius:999px;cursor:pointer}
   .bar-row{flex-direction:column;align-items:flex-start}
   .seg button{padding:10px 16px}
   .reset{margin-left:0}
@@ -237,9 +246,8 @@ pre code{background:none;padding:0}
   .bar{position:fixed;left:20px;top:20px;width:230px;z-index:5}
   .bar-row{flex-direction:column;align-items:flex-start;gap:6px}
   .reset{margin-left:0;padding-left:0}
-  .gap.multi{gap:8px;padding:10px 12px}
-  .gap.multi .gap-row{gap:5px}
-  .gap.multi .gap-n strong{font-size:16px}
+  .gap.multi{gap:16px;padding:14px}
+  .gap.multi .gap-row{gap:8px}
   .topbar{padding:10px 16px}
   .carinfo{padding:8px 16px 10px}
   .carinfo h1{font-size:21px}
@@ -263,10 +271,11 @@ pre code{background:none;padding:0}
 .panel > .more + .talk{margin-top:-16px}
 </style>
 
-<button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+<button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
 <div class="wrap">
   <div class="bar">
     <div class="menu-head"><span>Menu</span><button id="menuClose">Done</button></div>
+    <p class="menu-note">Switch between today’s panel and the new design, then pick the reason finance is unavailable.</p>
     <div class="bar-row"><span class="bar-label">View</span><div class="seg" id="segView"></div></div>
     <div class="bar-row"><span class="bar-label">Reason</span><div class="seg" id="segReason"></div><button class="reset" id="reset">Reset</button></div>
   </div>
@@ -338,8 +347,8 @@ const DATA={
   lead:'You have set £150, so a small increase could get you a quote.',
   why:'Your budget is £150 a month and lenders check that the repayment fits within it. This car needs about £170.',
   fixes:[FX.budget],cmp:[{t:'Monthly budget',al:'Your budget',a:150,bl:'Needed',b:170,u:' a month'}]},
- both:{price:7450,dep:750,bud:150,head:'A little more deposit or budget would do it',
-  lead:'You are just outside what lenders will quote for this car. Either change below could get you there.',
+ both:{price:7450,dep:750,bud:150,head:'',
+  lead:'Either change below could get you a quote.',
   why:'At your current deposit of £750 and budget of £150 a month, this car falls just outside what lenders will quote. Changing either one closes the gap.',
   fixes:[Object.assign({},FX.deposit,{need:300,monthly:148}),Object.assign({},FX.budget,{need:25,monthly:175})],
   cmp:[{t:'Deposit',al:'You put down',a:750,bl:'Needed',b:1050,u:''},{t:'Monthly budget',al:'Your budget',a:150,bl:'Needed',b:175,u:' a month'}]},
@@ -381,7 +390,7 @@ function gap(r){
     const anim=changed?(on?' anim-on':' anim-off'):'';
     const right=on?'<span class="ok-t'+(changed?' pop':'')+'">Covered</span>':'<span class="warn">'+gbp(short)+(c.u||'')+' '+(c.word||'short')+'</span>';
     return '<div class="gap-row"><div class="gap-t"><b>'+c.t+'</b>'+right+'</div>'
-     +'<div class="gap-n"><div><small>'+c.al+'</small><strong>'+gbp(a)+(c.u||'')+'</strong></div><div class="r"><small>'+c.bl+'</small><strong>'+gbp(c.b)+(c.u||'')+'</strong></div></div>'
+     +(r.cmp.length>1?'<div class="gap-one">'+gbp(a)+' of '+gbp(c.b)+(c.u||'')+' needed</div>':'<div class="gap-n"><div><small>'+c.al+'</small><strong>'+gbp(a)+(c.u||'')+'</strong></div><div class="r"><small>'+c.bl+'</small><strong>'+gbp(c.b)+(c.u||'')+'</strong></div></div>')
      +'<div class="gap-bar" role="img" aria-label="'+c.al+' '+gbp(a)+' of '+gbp(c.b)+' needed"><i class="'+(on?'on':'')+anim+'" style="--p0:'+(on?base:100)+'%;--p1:'+pct+'%;width:'+pct+'%"></i></div></div>';}).join('')
      +(alt?'<button class="link" data-swap>Or '+altTxt+' instead</button>':'')+'</div>';
 }
@@ -400,7 +409,7 @@ function fixesA(r){
   const sel=Math.min(S.sel,r.fixes.length-1);
   return '<div class="opts" role="radiogroup" aria-label="Ways to get this car">'+r.fixes.map(function(f,i){
    return '<button class="opt" role="radio" aria-checked="'+(i===sel)+'" data-sel="'+i+'"><span class="radio"></span>'
-    +'<span><span class="opt-title">'+fixLabel(f,f.need)+'</span><span class="opt-sub">'+fixSub(r,f,f.need)+'</span></span>'
+    +'<span><span class="opt-title">'+fixLabel(f,f.need)+'</span></span>'
     +'<span class="opt-out"><b>'+gbp(f.monthly)+'</b><small>a month, est.</small></span><span class="perk">'+f.perk+'</span></button>';}).join('')+'</div>'
    +(S.sel<0?'<button class="cta" disabled>Finance unavailable</button>':ctaBtn('Update my quote'));
 }
