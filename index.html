@@ -210,11 +210,11 @@ button{font:inherit;color:inherit;cursor:pointer}
 .talk summary{cursor:pointer;font-weight:600;padding:16px 0;list-style:none;display:flex;justify-content:space-between;align-items:center}
 .othr{background:var(--surface);border-top:1px solid var(--line);margin:0;padding:0 16px 16px}
 .othr h3{margin:0;font:inherit;font-weight:600;padding:16px 0 8px}
-.talk[open] summary{padding-bottom:8px}
+.talk[open] summary,.more[open] summary{padding-bottom:8px}
 .talk summary::-webkit-details-marker{display:none}
 .talk summary::after{content:"";width:8px;height:8px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg)}
 .talk[open] summary::after{transform:rotate(-135deg)}
-.whyd{background:var(--surface);border-top:1px solid var(--line);margin:0;padding:16px;font-weight:600}
+.whyd{background:var(--surface);border-top:1px solid var(--line);margin:0;padding:16px 16px 8px;font-weight:600}
 .whyd + .sec{padding-top:0}
 .whyd summary{cursor:pointer;font-weight:600;padding:14px 0;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
 .whyd summary::-webkit-details-marker{display:none}
