@@ -114,6 +114,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 .car-row::-webkit-scrollbar{display:none}
 .more>summary,.talk>summary{cursor:default}
 .more>summary::after,.talk>summary::after{display:none!important}
+.reasontxt{display:grid;gap:8px}
+.reasontxt b{font-size:15px}
+.reasontxt p{margin:0;color:var(--muted);font-size:14px;line-height:1.45}
 .fixbtn{display:grid;gap:6px}
 .fixhint{font-size:12px;color:var(--muted);text-align:center}
 .car-row .vcard{display:flex;flex-direction:column}
@@ -387,10 +390,10 @@ const DATA={
   why:'Most lenders will not offer finance below £4,000, so adding deposit or budget would not change the result for this car.',fixes:[],cmp:[{t:'Amount to borrow',al:'This car',a:3250,bl:'Lenders’ minimum',b:4000,u:'',word:'under'}]}};
 DATA.age={price:7450,dep:750,bud:200,head:'This car is older than lenders will finance',
   lead:'This car is 12 years old and lenders only finance cars up to 10 years. A newer car could get you a quote.',
-  why:'',fixes:[],cmp:[],lim:{t:'Age of car',al:'This car',a:'12 years',bl:'Lenders’ limit',b:'10 years',over:'2 years over'},kick:'Newer cars'};
+  why:'',fixes:[],cmp:[],lim:{t:'Age of car',al:'This car',a:'12 years',bl:'Lenders’ limit',b:'10 years',over:'2 years over'},kick:'Other options'};
 DATA.mileage={price:7450,dep:750,bud:200,head:'This car has more miles than lenders will finance',
   lead:'This car has 84,000 miles and lenders only finance cars up to 70,000. A lower-mileage car could get you a quote.',
-  why:'',fixes:[],cmp:[],lim:{t:'Mileage',al:'This car',a:'84,000 miles',bl:'Lenders’ limit',b:'70,000 miles',over:'14,000 miles over'},kick:'Lower-mileage cars'};
+  why:'',fixes:[],cmp:[],lim:{t:'Mileage',al:'This car',a:'84,000 miles',bl:'Lenders’ limit',b:'70,000 miles',over:'14,000 miles over'},kick:'Other options'};
 DATA.customer={price:7450,dep:750,bud:200,head:'We need to look at something on your application',
   lead:'This isn’t about the car, so changing the car or your deposit won’t help. Your Account Manager can talk it through with you and tell you what happens next.',
   why:'',fixes:[],cmp:[]};
@@ -431,14 +434,14 @@ const POOLMIN=[
  .map(function(c){return Object.assign({},c,{line:'<strong>'+gbp(c.price)+'</strong> cash'})});
 SL.age.pool=POOL;SL.mileage.pool=POOL;
 SL.min={min:4000,max:10000,step:500,key:'price',pool:POOLMIN,lab:v=>'Up to '+gbp(v),end:v=>gbp(v),aria:'Maximum price',sufL:' · lenders’ minimum',sufR:''};
-DATA.min.kick='Cars over £4,000';DATA.min.cmp=[];
+DATA.min.kick='Other options';DATA.min.cmp=[];
 S.lim={age:10,mileage:70000,min:10000};
 const slPct=(k,v)=>(v-SL[k].min)/(SL[k].max-SL[k].min)*100;
 function carsFor(k){
   const c=SL[k], list=c.pool.filter(function(x){return x[c.key]<=S.lim[k]}).sort(function(a,b){return a[c.key]-b[c.key]});
   return list.length?list.map(function(x){return vcard(c.fit?Object.assign({},x,{fit:c.fit(x)}):x)}).join(''):'<p class="hint">No cars match yet. Raise the limit to see more.</p>';
 }
-function kickTxt(r,k){const n=SL[k].pool.filter(function(x){return x[SL[k].key]<=S.lim[k]}).length;return r.kick+' · '+n+(n===1?' car':' cars')}
+function kickTxt(r,k){return r.kick;const n=SL[k].pool.filter(function(x){return x[SL[k].key]<=S.lim[k]}).length;return r.kick+' · '+n+(n===1?' car':' cars')}
 function sliderBlock(k){
   const c=SL[k], v=S.lim[k];
   return '<div class="slider" id="slider" style="--pct:'+slPct(k,v)+'%;--f:'+slPct(k,v)/100+'"><div class="sl-bub" id="slBub">'+c.lab(v)+'</div>'
@@ -535,7 +538,7 @@ function render(){
   else{
     st.innerHTML=ico.block+'Finance unavailable';st.className='status blocked';
     let body;
-    if(S.reason==='min') body='<div class="kicker" id="kick">'+kickTxt(r,'min')+'</div><div class="car-row" id="carRow" role="list">'+carsFor('min')+'</div>';
+    if(S.reason==='min') body='<div class="reasontxt"><p>This car costs £3,250 and lenders need you to borrow at least £4,000.</p></div><div class="kicker" id="kick">'+kickTxt(r,'min')+'</div><div class="car-row" id="carRow" role="list">'+carsFor('min')+'</div>';
     else if(r.lim) body='<div class="kicker" id="kick">'+kickTxt(r,S.reason)+'</div><div class="car-row" id="carRow" role="list">'+carsFor(S.reason)+'</div>';
     else if(S.reason==='customer') body='<button class="cta" data-toast="Prototype: this would request a call back.">Call me now</button>'
       +'<button class="ghost" data-toast="Prototype: this would open Carla chat.">'+ico.chat+'Ask Carla</button>'
