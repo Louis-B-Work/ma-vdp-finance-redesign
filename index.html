@@ -434,7 +434,7 @@ const POOLMIN=[
  .map(function(c){return Object.assign({},c,{line:'<strong>'+gbp(c.price)+'</strong> cash'})});
 SL.age.pool=POOL;SL.mileage.pool=POOL;
 SL.min={min:4000,max:10000,step:500,key:'price',pool:POOLMIN,lab:v=>'Up to '+gbp(v),end:v=>gbp(v),aria:'Maximum price',sufL:' · lenders’ minimum',sufR:''};
-DATA.min.kick='Other options';DATA.min.cmp=[];
+DATA.min.kick='Other options';DATA.min.cmp=[];DATA.age.one='This car is 12 years old and lenders only finance cars up to 10 years old.';DATA.mileage.one='This car has 84,000 miles and lenders only finance cars up to 70,000 miles.';
 S.lim={age:10,mileage:70000,min:10000};
 const slPct=(k,v)=>(v-SL[k].min)/(SL[k].max-SL[k].min)*100;
 function carsFor(k){
@@ -539,7 +539,7 @@ function render(){
     st.innerHTML=ico.block+'Finance unavailable';st.className='status blocked';
     let body;
     if(S.reason==='min') body='<div class="reasontxt"><p>This car costs £3,250 and lenders need you to borrow at least £4,000.</p></div><div class="kicker" id="kick">'+kickTxt(r,'min')+'</div><div class="car-row" id="carRow" role="list">'+carsFor('min')+'</div>';
-    else if(r.lim) body='<div class="kicker" id="kick">'+kickTxt(r,S.reason)+'</div><div class="car-row" id="carRow" role="list">'+carsFor(S.reason)+'</div>';
+    else if(r.lim) body='<div class="reasontxt"><p>'+r.one+'</p></div><div class="kicker" id="kick">'+kickTxt(r,S.reason)+'</div><div class="car-row" id="carRow" role="list">'+carsFor(S.reason)+'</div>';
     else if(S.reason==='customer') body='<button class="cta" data-toast="Prototype: this would request a call back.">Call me now</button>'
       +'<button class="ghost" data-toast="Prototype: this would open Carla chat.">'+ico.chat+'Ask Carla</button>'
       +'<button class="ghost" data-toast="Prototype: this would open WhatsApp.">'+ico.chat+'WhatsApp us</button>';
