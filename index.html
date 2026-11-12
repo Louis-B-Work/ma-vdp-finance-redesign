@@ -121,9 +121,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 .fixhint{font-size:12px;color:var(--muted);text-align:center}
 .car-row .vcard{display:flex;flex-direction:column}
 .car-row .vimg{flex:none;height:92px!important;background-color:var(--line)}
-.car-row .vb{display:flex;flex-direction:column;flex:1;padding:12px}
-.car-row .vb b{font-size:14px;line-height:1.25;margin-bottom:4px}
-.car-row .vb small{font-size:12px;line-height:1.35;margin-bottom:10px}
+.car-row .vb{display:flex;flex-direction:column;flex:1;padding:12px 10px}
+.car-row .vb b{font-size:13px;line-height:1.25;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.car-row .vb small{font-size:12px;line-height:1.35;min-height:33px;margin-bottom:8px}
 .car-row .vb .vfit{margin-top:0;margin-bottom:6px;font-size:12px}
 .car-row .vb .vp{margin-top:0;font-size:12px}
 .car-row .vb .vfit + .vp{margin-top:0}
@@ -498,10 +498,11 @@ function fixesA(r){
     return '<div class="fixbtn"><button class="'+(i===0?'cta':'ghost')+'" data-fix="'+i+'">'+fixLabel(f,f.need)+'</button><small class="fixhint">'+gbp(f.monthly)+' a month, est. · '+f.perk+'</small></div>';
   }).join('');
 }
+function nice(n){return n.split(' ').map(function(w){return w==='BMW'||/[0-9]/.test(w)?w:w.charAt(0)+w.slice(1).toLowerCase()}).join(' ')}
 function vcard(v){
   const k=150/v.w, st='height:'+Math.round(v.h*k)+'px;background-size:'+(461*k).toFixed(1)+'px auto;background-position:'+(-v.x*k).toFixed(1)+'px '+(-v.y*k).toFixed(1)+'px';
   return '<button class="vcard" role="listitem" data-toast="'+TOASTMSG+'"><span class="vimg" style="'+st+'"><span class="vtag">'+v.tag+'</span><span class="vheart"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E32739" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21l8.8-8.3a5 5 0 0 0 0-7.1z"/></svg></span></span>'
-   +'<span class="vb"><b>'+v.n+'</b><small>'+v.s+'</small>'+(v.fit?'<span class="vfit">'+ico.okI.replace(/width="16" height="16"/,'width="13" height="13"')+v.fit+'</span>':'')+(v.line?'<span class="vp">'+v.line+'</span>':'<span class="vp"><strong>'+v.p.split('.')[0]+'</strong> p/m</span>')+'</span></button>';
+   +'<span class="vb"><b>'+nice(v.n)+'</b><small>'+v.s+'</small>'+(v.fit?'<span class="vfit">'+ico.okI.replace(/width="16" height="16"/,'width="13" height="13"')+v.fit+'</span>':'')+(v.line?'<span class="vp">'+v.line+'</span>':'<span class="vp"><strong>'+v.p.split('.')[0]+'</strong> p/m</span>')+'</span></button>';
 }
 function routes(){
   return '<details class="more" open><summary>Other options</summary><div class="routes"><p class="hint">Lenders are often more flexible on newer and lower-mileage cars.</p><div class="car-row" role="list">'+VEH.map(vcard).join('')+'</div></div></details>';
