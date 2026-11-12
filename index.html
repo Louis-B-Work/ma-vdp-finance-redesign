@@ -344,7 +344,7 @@ pre code{background:none;padding:0}
 <pre><code>{
   reason: "DEPOSIT_TOO_LOW" | "BELOW_MIN_BORROW"
         | "VEHICLE_TOO_OLD" | "MILEAGE_TOO_HIGH"
-        | "CUSTOMER_LEVEL" | "UNKNOWN",
+        | "UNKNOWN",
   currentDeposit: 750,
   currentMonthlyBudget: 150,
   minBorrow: 4000,
@@ -374,7 +374,7 @@ pre code{background:none;padding:0}
 
 <script>
 const gbp=n=>'£'+n.toLocaleString('en-GB');
-const REASONS={deposit:'Deposit too low',min:'Below minimum borrow',age:'Car too old',mileage:'Mileage too high',customer:'About the customer'};
+const REASONS={deposit:'Deposit too low',min:'Below minimum borrow',age:'Car too old',mileage:'Mileage too high'};
 const FX={
  deposit:{kind:'deposit',need:250,step:50,monthly:189,perk:'No extra monthly cost'},
  budget:{kind:'budget',need:20,step:5,monthly:170,perk:'No extra upfront cost'}};
@@ -404,7 +404,7 @@ DATA.mileage={price:7450,dep:750,bud:200,head:'This car has more miles than lend
 DATA.customer={price:7450,dep:750,bud:200,head:'We need to look at something on your application',
   lead:'This isn’t about the car, so changing the car or your deposit won’t help. Your Account Manager can talk it through with you and tell you what happens next.',
   why:'',fixes:[],cmp:[]};
-const NOFIX=['min','age','mileage','customer'];
+const NOFIX=['min','age','mileage'];
 function limitCard(l){
   return '<div class="gap"><div class="gap-row"><div class="gap-t"><b>'+l.t+'</b><span class="warn">'+l.over+'</span></div>'
    +'<div class="gap-n"><div><small>'+l.al+'</small><strong>'+l.a+'</strong></div><div class="r"><small>'+l.bl+'</small><strong>'+l.b+'</strong></div></div>'
