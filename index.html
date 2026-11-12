@@ -121,12 +121,13 @@ button{font:inherit;color:inherit;cursor:pointer}
 .fixhint{font-size:12px;color:var(--muted);text-align:center}
 .car-row .vcard{display:flex;flex-direction:column}
 .car-row .vimg{flex:none;height:92px!important;background-color:var(--line)}
-.car-row .vb{display:flex;flex-direction:column;flex:1}
-.car-row .vb .vfit,.car-row .vb .vp{margin-top:auto}
-.car-row .vb .vfit + .vp{margin-top:4px}
-.car-row .vb{padding:8px 10px 10px}
-.car-row .vb small{margin-bottom:4px;font-size:12px;line-height:1.3}
-.car-row .vb .vfit,.car-row .vb .vp{font-size:12px}
+.car-row .vb{display:flex;flex-direction:column;flex:1;padding:12px}
+.car-row .vb b{font-size:14px;line-height:1.25;margin-bottom:4px}
+.car-row .vb small{font-size:12px;line-height:1.35;margin-bottom:12px}
+.car-row .vb .vfit{margin-top:auto;margin-bottom:6px;font-size:12px}
+.car-row .vb .vp{margin-top:auto;font-size:12px}
+.car-row .vb .vfit + .vp{margin-top:0}
+.car-row .vb .vp strong{font-size:17px;font-weight:800}
 .vcard{flex:0 0 150px;scroll-snap-align:start;scroll-margin-left:16px;text-align:left;padding:0;border:1px solid var(--line);background:var(--card);border-radius:12px;overflow:hidden;display:grid;align-content:start}
 .vimg{display:block;position:relative;background-color:#d9d6e2;background-image:var(--cars);background-repeat:no-repeat}
 .vtag{position:absolute;left:8px;top:8px;background:var(--card);color:var(--accent);font-size:12px;font-weight:700;border-radius:999px;padding:3px 8px}
@@ -207,6 +208,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 /* talk */
 .talk{background:var(--surface);border-top:1px solid var(--line);margin:0;padding:0 16px}
 .talk summary{cursor:pointer;font-weight:600;padding:16px 0;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.othr{background:var(--surface);border-top:1px solid var(--line);margin:0;padding:0 16px 16px}
+.othr h3{margin:0;font:inherit;font-weight:600;padding:16px 0 8px}
+.talk[open] summary{padding-bottom:8px}
 .talk summary::-webkit-details-marker{display:none}
 .talk summary::after{content:"";width:8px;height:8px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg)}
 .talk[open] summary::after{transform:rotate(-135deg)}
@@ -229,7 +233,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .whyd-b b{font-size:15px}
 .whyd-b p{margin:0;color:var(--muted);font-size:14px}
 .talk-b{display:grid;gap:10px;padding-bottom:16px}
-.talk-b p{color:var(--muted)!important;font-size:14px}
+.talk-b p{margin:0;color:var(--muted)!important;font-size:14px}
 
 /* success */
 .panel.okp{background:var(--ok-soft);margin:0;padding:16px}
@@ -441,6 +445,7 @@ function carsFor(k){
   const c=SL[k], list=c.pool.filter(function(x){return x[c.key]<=S.lim[k]}).sort(function(a,b){return a[c.key]-b[c.key]});
   return list.length?list.map(function(x){return vcard(c.fit?Object.assign({},x,{fit:c.fit(x)}):x)}).join(''):'<p class="hint">No cars match yet. Raise the limit to see more.</p>';
 }
+function carsSec(k){return '<div class="othr"><h3 id="kick">'+kickTxt(DATA[k],k)+'</h3><div class="car-row" id="carRow" role="list">'+carsFor(k)+'</div></div>'}
 function kickTxt(r,k){return r.kick;const n=SL[k].pool.filter(function(x){return x[SL[k].key]<=S.lim[k]}).length;return r.kick+' · '+n+(n===1?' car':' cars')}
 function sliderBlock(k){
   const c=SL[k], v=S.lim[k];
@@ -496,7 +501,7 @@ function fixesA(r){
 function vcard(v){
   const k=150/v.w, st='height:'+Math.round(v.h*k)+'px;background-size:'+(461*k).toFixed(1)+'px auto;background-position:'+(-v.x*k).toFixed(1)+'px '+(-v.y*k).toFixed(1)+'px';
   return '<button class="vcard" role="listitem" data-toast="'+TOASTMSG+'"><span class="vimg" style="'+st+'"><span class="vtag">'+v.tag+'</span><span class="vheart"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E32739" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21l8.8-8.3a5 5 0 0 0 0-7.1z"/></svg></span></span>'
-   +'<span class="vb"><b>'+v.n+'</b><small>'+v.s+'</small>'+(v.fit?'<span class="vfit">'+ico.okI.replace(/width="16" height="16"/,'width="13" height="13"')+v.fit+'</span>':'')+(v.line?'<span class="vp">'+v.line+'</span>':'<span class="vp">From <strong>'+v.p+'</strong> per month</span>')+'</span></button>';
+   +'<span class="vb"><b>'+v.n+'</b><small>'+v.s+'</small>'+(v.fit?'<span class="vfit">'+ico.okI.replace(/width="16" height="16"/,'width="13" height="13"')+v.fit+'</span>':'')+(v.line?'<span class="vp">'+v.line+'</span>':'<span class="vp"><strong>'+v.p.split('.')[0]+'</strong> p/m</span>')+'</span></button>';
 }
 function routes(){
   return '<details class="more" open><summary>Other options</summary><div class="routes"><p class="hint">Lenders are often more flexible on newer and lower-mileage cars.</p><div class="car-row" role="list">'+VEH.map(vcard).join('')+'</div></div></details>';
@@ -537,15 +542,15 @@ function render(){
   else if(S.phase==='done'){h=success();st.innerHTML=ico.okI+'From '+gbp(S.mo)+'/mo';st.className='status ok';}
   else{
     st.innerHTML=ico.block+'Finance unavailable';st.className='status blocked';
-    let body;
-    if(S.reason==='min') body='<div class="reasontxt"><p>This car costs £3,250 and lenders need you to borrow at least £4,000.</p></div><div class="kicker" id="kick">'+kickTxt(r,'min')+'</div><div class="car-row" id="carRow" role="list">'+carsFor('min')+'</div>';
-    else if(r.lim) body='<div class="reasontxt"><p>'+r.one+'</p></div><div class="kicker" id="kick">'+kickTxt(r,S.reason)+'</div><div class="car-row" id="carRow" role="list">'+carsFor(S.reason)+'</div>';
+    let body,other='';
+    if(S.reason==='min'){body='<div class="reasontxt"><p>This car costs £3,250 and lenders need you to borrow at least £4,000.</p></div>';other=carsSec('min');}
+    else if(r.lim){body='<div class="reasontxt"><p>'+r.one+'</p></div>';other=carsSec(S.reason);}
     else if(S.reason==='customer') body='<button class="cta" data-toast="Prototype: this would request a call back.">Call me now</button>'
       +'<button class="ghost" data-toast="Prototype: this would open Carla chat.">'+ico.chat+'Ask Carla</button>'
       +'<button class="ghost" data-toast="Prototype: this would open WhatsApp.">'+ico.chat+'WhatsApp us</button>';
     else body=fixesA(r);
     const nofix=NOFIX.indexOf(S.reason)>=0;
-    h='<div class="whyd"><span class="whyd-t">'+ico.block+(S.reason==='customer'?'Finance unavailable':'Finance on this car is unavailable')+'</span></div><div class="sec"><div class="panel">'+gap(r)+body+'</div></div>'+(nofix?'':routes())+(S.reason==='customer'?'':talk(S.reason==='min'));
+    h='<div class="whyd"><span class="whyd-t">'+ico.block+(S.reason==='customer'?'Finance unavailable':'Finance on this car is unavailable')+'</span></div><div class="sec"><div class="panel">'+gap(r)+body+'</div></div>'+other+(nofix?'':routes())+(S.reason==='customer'?'':talk(S.reason==='min'));
   }
   const prev=Array.prototype.map.call(document.querySelectorAll('#panelMount details'),function(d){return d.open});
   $('panelMount').innerHTML=h;
