@@ -70,7 +70,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 
 /* panel */
 .panel{display:grid;gap:16px}
-.sec{margin:0;background:var(--panel-a);padding:16px;display:grid;gap:16px}
+.sec{margin:0;background:var(--surface);padding:16px;display:grid;gap:16px}
 .reason{display:grid;gap:10px}
 .reason p{margin:0;color:var(--muted)}
 .reason h2,.panel h2{margin:0;font-size:19px;line-height:1.2;letter-spacing:-.02em;font-weight:800;text-wrap:pretty}
@@ -82,8 +82,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 .why summary::after{content:"";width:6px;height:6px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin-top:-3px}
 .why[open] summary::after{transform:rotate(-135deg);margin-top:3px}
 .why p{margin-top:6px;color:var(--muted)}
-.gap{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;display:grid;gap:16px}
-.gap-row{display:grid;gap:8px}
+.gap{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 16px;display:grid;gap:12px}
+.gap.multi{gap:16px}
+.gap-row{display:grid;gap:6px}
 .gap-t{display:flex;justify-content:space-between;gap:8px;align-items:baseline;font-size:14px}
 .warn{color:var(--warn);font-weight:700;font-size:13px;font-variant-numeric:tabular-nums}
 .gap-n{display:grid;grid-template-columns:1fr 1fr;gap:10px;font-variant-numeric:tabular-nums}
@@ -93,10 +94,10 @@ button{font:inherit;color:inherit;cursor:pointer}
 .gap.multi .gap-row + .gap-row{border-top:1px solid var(--line);padding-top:16px}
 .gap-one{font-size:15px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
 .gap-bar{height:8px;border-radius:999px;background:var(--line);overflow:hidden}
-.gap-bar i{display:block;height:100%;border-radius:999px;background:var(--warn);transition:width .35s ease,background .35s ease}
+.gap-bar i{display:block;height:100%;border-radius:999px;background:#9A94AD;transition:width .35s ease,background .35s ease}
 .gap-bar i.on{background:var(--green)}
-@keyframes fillGreen{from{width:var(--p0);background:var(--warn)}to{width:var(--p1);background:var(--green)}}
-@keyframes fillRed{from{width:var(--p0);background:var(--green)}to{width:var(--p1);background:var(--warn)}}
+@keyframes fillGreen{from{width:var(--p0);background:#9A94AD}to{width:var(--p1);background:var(--green)}}
+@keyframes fillRed{from{width:var(--p0);background:var(--green)}to{width:var(--p1);background:#9A94AD}}
 @keyframes pop{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
 .gap-bar i.anim-on{animation:fillGreen .7s cubic-bezier(.2,.7,.2,1) both}
 .gap-bar i.anim-off{animation:fillRed .5s ease both}
@@ -111,6 +112,18 @@ button{font:inherit;color:inherit;cursor:pointer}
 .more .routes{padding-bottom:16px}
 .car-row{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:2px 16px 4px;scrollbar-width:none}
 .car-row::-webkit-scrollbar{display:none}
+.more>summary,.talk>summary{cursor:default}
+.more>summary::after,.talk>summary::after{display:none!important}
+.fixbtn{display:grid;gap:6px}
+.fixhint{font-size:12px;color:var(--muted);text-align:center}
+.car-row .vcard{display:flex;flex-direction:column}
+.car-row .vimg{flex:none;height:92px!important;background-color:var(--line)}
+.car-row .vb{display:flex;flex-direction:column;flex:1}
+.car-row .vb .vfit,.car-row .vb .vp{margin-top:auto}
+.car-row .vb .vfit + .vp{margin-top:4px}
+.car-row .vb{padding:8px 10px 10px}
+.car-row .vb small{margin-bottom:4px;font-size:12px;line-height:1.3}
+.car-row .vb .vfit,.car-row .vb .vp{font-size:12px}
 .vcard{flex:0 0 150px;scroll-snap-align:start;scroll-margin-left:16px;text-align:left;padding:0;border:1px solid var(--line);background:var(--card);border-radius:12px;overflow:hidden;display:grid;align-content:start}
 .vimg{display:block;position:relative;background-color:#d9d6e2;background-image:var(--cars);background-repeat:no-repeat}
 .vtag{position:absolute;left:8px;top:8px;background:var(--card);color:var(--accent);font-size:12px;font-weight:700;border-radius:999px;padding:3px 8px}
@@ -194,16 +207,25 @@ button{font:inherit;color:inherit;cursor:pointer}
 .talk summary::-webkit-details-marker{display:none}
 .talk summary::after{content:"";width:8px;height:8px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg)}
 .talk[open] summary::after{transform:rotate(-135deg)}
-.whyd{background:var(--surface);border-top:1px solid var(--line);margin:0;padding:0 16px}
+.whyd{background:var(--surface);border-top:1px solid var(--line);margin:0;padding:16px;font-weight:600}
+.whyd + .sec{padding-top:0}
 .whyd summary{cursor:pointer;font-weight:600;padding:14px 0;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
 .whyd summary::-webkit-details-marker{display:none}
 .whyd summary::after{content:"";flex:none;width:8px;height:8px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg)}
 .whyd[open] summary::after{transform:rotate(-135deg)}
+.slider{position:relative;padding:36px 0 0}
+.sl-bub{position:absolute;top:0;left:clamp(60px,calc(14px + (100% - 28px)*var(--f)),calc(100% - 60px));transform:translateX(-50%);background:#6905F2;color:#fff;font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;white-space:nowrap}
+.slider input{width:100%;height:28px;margin:0;-webkit-appearance:none;appearance:none;background:transparent;cursor:pointer}
+.slider input::-webkit-slider-runnable-track{height:6px;border-radius:99px;background:linear-gradient(90deg,#6905F2 var(--pct),var(--line) var(--pct))}
+.slider input::-moz-range-track{height:6px;border-radius:99px;background:linear-gradient(90deg,#6905F2 var(--pct),var(--line) var(--pct))}
+.slider input::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;margin-top:-11px;border-radius:50%;background:#fff;border:1px solid var(--line);box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.slider input::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:#fff;border:1px solid var(--line);box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.sl-ends{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:2px}
 .whyd-t{display:flex;align-items:center;gap:8px;color:var(--warn)}
 .whyd-b{display:grid;gap:8px;padding-bottom:16px}
 .whyd-b b{font-size:15px}
 .whyd-b p{margin:0;color:var(--muted);font-size:14px}
-.talk-b{display:grid;gap:10px;padding-bottom:20px}
+.talk-b{display:grid;gap:10px;padding-bottom:16px}
 .talk-b p{color:var(--muted)!important;font-size:14px}
 
 /* success */
@@ -258,19 +280,15 @@ pre code{background:none;padding:0}
   .bar{position:fixed;left:20px;top:20px;width:230px;z-index:5}
   .bar-row{flex-direction:column;align-items:flex-start;gap:6px}
   .reset{margin-left:0;padding-left:0}
-  .gap.multi{gap:16px;padding:14px}
-  .gap.multi .gap-row{gap:8px}
   .topbar{padding:10px 16px}
   .carinfo{padding:8px 16px 10px}
   .carinfo h1{font-size:21px}
   .statusrow{margin-top:2px}
   .panel{gap:16px;padding:0}
   .panel h2{font-size:18px}
-  .gap{padding:12px;gap:12px}
   .gap-n strong{font-size:18px}
   .opt{padding:10px 12px}
   .cta{min-height:48px;padding:12px 18px}
-  .talk summary,.more summary{padding:13px 0}
   .talk{margin-top:0}
   .more{margin-top:0}
   .panel.okp{padding-bottom:16px}
@@ -354,31 +372,28 @@ const DATA={
  deposit:{price:7450,dep:750,bud:200,head:'',
   lead:'With a slightly bigger deposit, lenders should be able to give you a quote.',
   why:'Lenders set a minimum deposit using the price and age of the car. Yours is £750 and this car needs £1,000.',
-  fixes:[FX.deposit],cmp:[{t:'Deposit',al:'You put down',a:750,bl:'Needed',b:1000,u:''}]},
+  fixes:[FX.deposit],cmp:[{t:'Deposit',al:'Your deposit',a:750,bl:'Required',b:1000,u:''}]},
  budget:{price:7450,dep:1000,bud:150,head:'This car needs a monthly budget of about £170',
   lead:'You have set £150, so a small increase could get you a quote.',
   why:'Your budget is £150 a month and lenders check that the repayment fits within it. This car needs about £170.',
-  fixes:[FX.budget],cmp:[{t:'Monthly budget',al:'Your budget',a:150,bl:'Needed',b:170,u:' a month'}]},
+  fixes:[FX.budget],cmp:[{t:'Monthly budget',al:'Your budget',a:150,bl:'Required',b:170,u:' a month'}]},
  both:{price:7450,dep:750,bud:150,head:'',
   lead:'Either change below could get you a quote.',
   why:'At your current deposit of £750 and budget of £150 a month, this car falls just outside what lenders will quote. Changing either one closes the gap.',
   fixes:[Object.assign({},FX.deposit,{need:300,monthly:148}),Object.assign({},FX.budget,{need:25,monthly:175})],
-  cmp:[{t:'Deposit',al:'You put down',a:750,bl:'Needed',b:1050,u:''},{t:'Monthly budget',al:'Your budget',a:150,bl:'Needed',b:175,u:' a month'}]},
+  cmp:[{t:'Deposit',al:'Your deposit',a:750,bl:'Required',b:1050,u:''},{t:'Monthly budget',al:'Your budget',a:150,bl:'Required',b:175,u:' a month'}]},
  min:{price:3250,dep:750,bud:150,head:'This car is below the lenders’ minimum',
   lead:'Lenders need you to borrow at least £4,000, and this car costs £3,250.',
   why:'Most lenders will not offer finance below £4,000, so adding deposit or budget would not change the result for this car.',fixes:[],cmp:[{t:'Amount to borrow',al:'This car',a:3250,bl:'Lenders’ minimum',b:4000,u:'',word:'under'}]}};
 DATA.age={price:7450,dep:750,bud:200,head:'This car is older than lenders will finance',
-  lead:'Lenders only finance cars up to a certain age. A newer car could get you a quote.',
+  lead:'This car is 12 years old and lenders only finance cars up to 10 years. A newer car could get you a quote.',
   why:'',fixes:[],cmp:[],lim:{t:'Age of car',al:'This car',a:'12 years',bl:'Lenders’ limit',b:'10 years',over:'2 years over'},kick:'Newer cars'};
 DATA.mileage={price:7450,dep:750,bud:200,head:'This car has more miles than lenders will finance',
-  lead:'Lenders only finance cars up to a certain mileage. A lower-mileage car could get you a quote.',
+  lead:'This car has 84,000 miles and lenders only finance cars up to 70,000. A lower-mileage car could get you a quote.',
   why:'',fixes:[],cmp:[],lim:{t:'Mileage',al:'This car',a:'84,000 miles',bl:'Lenders’ limit',b:'70,000 miles',over:'14,000 miles over'},kick:'Lower-mileage cars'};
 DATA.customer={price:7450,dep:750,bud:200,head:'We need to look at something on your application',
   lead:'This isn’t about the car, so changing the car or your deposit won’t help. Your Account Manager can talk it through with you and tell you what happens next.',
   why:'',fixes:[],cmp:[]};
-const FITS={age:['4 years old','6 years old','3 years old'],mileage:['38,000 miles','52,000 miles','24,000 miles']};
-const FITLIM={age:'within limit',mileage:'within limit'};
-const vehFor=k=>VEH.map(function(v,i){return Object.assign({},v,{fit:FITS[k][i]})});
 const NOFIX=['min','age','mileage','customer'];
 function limitCard(l){
   return '<div class="gap"><div class="gap-row"><div class="gap-t"><b>'+l.t+'</b><span class="warn">'+l.over+'</span></div>'
@@ -388,15 +403,48 @@ function limitCard(l){
 const VEH_MIN=[
  {n:'AUDI Q2',s:'2.0 TDI S Line 5dr S Tronic',p:'£4,450',line:'<strong>£4,450</strong> cash',tag:'Example',x:30,y:632,w:118,h:88},
  {n:'FORD TRANSIT CUSTOM',s:'2.0 EcoBlue 340 L2 Limited',p:'£6,995',line:'<strong>£6,995</strong> cash',tag:'Example',x:155,y:632,w:118,h:88},
- {n:'BMW 1 SERIES',s:'118d M Sport 5dr Step Auto',p:'£4,250',line:'<strong>£4,250</strong> cash',tag:'Example',x:30,y:510,w:60,h:41}];
+ {n:'BMW 1 SERIES',s:'118d M Sport 5dr Step Auto',p:'£4,250',line:'<strong>£4,250</strong> cash',tag:'Example',x:30,y:510,w:60,h:45}];
 const VEH=[
  {n:'AUDI Q2',s:'1.4 TFSI S Line 5dr S Tronic',p:'£351.00',tag:'Example',x:30,y:632,w:118,h:88},
  {n:'FORD TRANSIT CUSTOM',s:'2.0 EcoBlue 340 L2 Limited',p:'£626.05',tag:'Example',x:155,y:632,w:118,h:88},
- {n:'BMW 1 SERIES',s:'118i M Sport 5dr Step Auto',p:'£349.00',tag:'Example',x:30,y:510,w:60,h:41}];
+ {n:'BMW 1 SERIES',s:'118i M Sport 5dr Step Auto',p:'£349.00',tag:'Example',x:30,y:510,w:60,h:45}];
 const TOASTMSG='Prototype: this would open car search with the filter applied.';
 
 const VIEWS={new:'New design',current:'Current Members’ Area'};
 const S={view:'new',reason:'deposit',sel:-1,added:{deposit:0,budget:0},phase:'idle',done:null,mo:0};
+const POOL=[
+ Object.assign({},VEH[2],{age:2,miles:18000,s:'118i M Sport 5dr Step Auto',p:'£389.00'}),
+ Object.assign({},VEH[0],{age:3,miles:24000,s:'1.5 TFSI S Line 5dr',p:'£372.00'}),
+ Object.assign({},VEH[0],{age:4,miles:38000,p:'£351.00'}),
+ Object.assign({},VEH[1],{age:6,miles:52000,p:'£626.05'}),
+ Object.assign({},VEH[2],{age:8,miles:61000,s:'116d SE 5dr',p:'£299.00'}),
+ Object.assign({},VEH[1],{age:9,miles:68000,s:'2.0 EcoBlue 300 L1 Sport',p:'£548.00'})];
+const SL={age:{min:2,max:10,step:1,key:'age',lab:v=>'Up to '+v+' years old',end:v=>v+' years',aria:'Maximum age of car',fit:c=>c.age+' years old'},
+ mileage:{min:10000,max:70000,step:5000,key:'miles',lab:v=>'Up to '+v.toLocaleString('en-GB')+' miles',end:v=>v.toLocaleString('en-GB')+' miles',aria:'Maximum mileage',fit:c=>c.miles.toLocaleString('en-GB')+' miles'}};
+const POOLMIN=[
+ Object.assign({},VEH_MIN[2],{price:4250}),
+ Object.assign({},VEH_MIN[0],{price:4450}),
+ Object.assign({},VEH_MIN[2],{price:5200,n:'BMW 1 SERIES',s:'116d SE 5dr'}),
+ Object.assign({},VEH_MIN[1],{price:6995}),
+ Object.assign({},VEH_MIN[0],{price:7800,s:'1.5 TFSI Sport 5dr'}),
+ Object.assign({},VEH_MIN[1],{price:9450,s:'2.0 EcoBlue 300 L1 Sport'})]
+ .map(function(c){return Object.assign({},c,{line:'<strong>'+gbp(c.price)+'</strong> cash'})});
+SL.age.pool=POOL;SL.mileage.pool=POOL;
+SL.min={min:4000,max:10000,step:500,key:'price',pool:POOLMIN,lab:v=>'Up to '+gbp(v),end:v=>gbp(v),aria:'Maximum price',sufL:' · lenders’ minimum',sufR:''};
+DATA.min.kick='Cars over £4,000';DATA.min.cmp=[];
+S.lim={age:10,mileage:70000,min:10000};
+const slPct=(k,v)=>(v-SL[k].min)/(SL[k].max-SL[k].min)*100;
+function carsFor(k){
+  const c=SL[k], list=c.pool.filter(function(x){return x[c.key]<=S.lim[k]}).sort(function(a,b){return a[c.key]-b[c.key]});
+  return list.length?list.map(function(x){return vcard(c.fit?Object.assign({},x,{fit:c.fit(x)}):x)}).join(''):'<p class="hint">No cars match yet. Raise the limit to see more.</p>';
+}
+function kickTxt(r,k){const n=SL[k].pool.filter(function(x){return x[SL[k].key]<=S.lim[k]}).length;return r.kick+' · '+n+(n===1?' car':' cars')}
+function sliderBlock(k){
+  const c=SL[k], v=S.lim[k];
+  return '<div class="slider" id="slider" style="--pct:'+slPct(k,v)+'%;--f:'+slPct(k,v)/100+'"><div class="sl-bub" id="slBub">'+c.lab(v)+'</div>'
+   +'<input type="range" id="slRange" min="'+c.min+'" max="'+c.max+'" step="'+c.step+'" value="'+v+'" aria-label="'+c.aria+'">'
+   +'<div class="sl-ends"><span>'+c.end(c.min)+(c.sufL||'')+'</span><span>'+c.end(c.max)+(c.sufR===undefined?' · lenders’ limit':c.sufR)+'</span></div></div>';
+}
 const $=id=>document.getElementById(id);
 const fixOf=()=>{const f=DATA[S.reason].fixes;return f[Math.min(S.sel,f.length-1)]};
 const ico={
@@ -411,7 +459,7 @@ function gap(r){
   if(!r.cmp.length)return '';
   const one=r.cmp.length>1 && S.sel>=0 && !!r.fixes[S.sel];
   const idx=one?[S.sel]:r.cmp.map(function(c,k){return k});
-  const alt=one?r.fixes[1-S.sel]:null;
+  const alt=null;
   const altTxt=alt?(alt.kind==='deposit'?'add '+gbp(alt.need)+' to your deposit':'raise your monthly budget by '+gbp(alt.need)):'';
   return '<div class="gap'+(r.cmp.length>1?' multi':'')+'">'+idx.map(function(k){const c=r.cmp[k];
     const fx=r.fixes[k], on=!!fx && S.sel===k;
@@ -419,8 +467,8 @@ function gap(r){
     const base=Math.round(c.a/c.b*100), pct=on?100:base;
     const a=on?c.a+fx.need:c.a, short=c.b-a;
     const anim=changed?(on?' anim-on':' anim-off'):'';
-    const right=on?'<span class="ok-t'+(changed?' pop':'')+'">Covered</span>':'<span class="warn">'+gbp(short)+(c.u||'')+' '+(c.word||'short')+'</span>';
-    return '<div class="gap-row"><div class="gap-t"><b>'+c.t+'</b>'+right+'</div>'
+    const right=on?'<span class="ok-t'+(changed?' pop':'')+'">Covered</span>':'';
+    return '<div class="gap-row">'+(r.cmp.length>1?'<div class="gap-t"><b>'+c.t+'</b>'+right+'</div>':'')
      +(r.cmp.length>1?'<div class="gap-one">'+gbp(a)+' of '+gbp(c.b)+(c.u||'')+' needed</div>':'<div class="gap-n"><div><small>'+c.al+'</small><strong>'+gbp(a)+(c.u||'')+'</strong></div><div class="r"><small>'+c.bl+'</small><strong>'+gbp(c.b)+(c.u||'')+'</strong></div></div>')
      +'<div class="gap-bar" role="img" aria-label="'+c.al+' '+gbp(a)+' of '+gbp(c.b)+' needed"><i class="'+(on?'on':'')+anim+'" style="--p0:'+(on?base:100)+'%;--p1:'+pct+'%;width:'+pct+'%"></i></div></div>';}).join('')
      +(alt?'<button class="link" data-swap>Or '+altTxt+' instead</button>':'')+'</div>';
@@ -437,12 +485,10 @@ function ctaLabel(f,amt){return f.kind==='deposit'?'Add '+gbp(amt)+' deposit':'R
 function fixSub(r,f,amt){return f.kind==='deposit'?'Deposit '+gbp(r.dep)+' → '+gbp(r.dep+amt):'Budget '+gbp(r.bud)+' → '+gbp(r.bud+amt)+' a month'}
 
 function fixesA(r){
-  const sel=Math.min(S.sel,r.fixes.length-1);
-  return '<div class="opts" role="radiogroup" aria-label="Ways to get this car">'+r.fixes.map(function(f,i){
-   return '<button class="opt" role="radio" aria-checked="'+(i===sel)+'" data-sel="'+i+'"><span class="radio"></span>'
-    +'<span><span class="opt-title">'+fixLabel(f,f.need)+'</span></span>'
-    +'<span class="opt-out"><b>'+gbp(f.monthly)+'</b><small>a month, est.</small></span><span class="perk">'+f.perk+'</span></button>';}).join('')+'</div>'
-   +(S.sel<0?'<button class="cta" disabled>Finance unavailable</button>':ctaBtn('Update my quote'));
+  return r.fixes.map(function(f,i){
+    if(S.phase==='loading'){return i===S.sel?'<button class="cta busy" disabled><span class="spin"></span>Checking with lenders…</button>':''}
+    return '<div class="fixbtn"><button class="'+(i===0?'cta':'ghost')+'" data-fix="'+i+'">'+fixLabel(f,f.need)+'</button><small class="fixhint">'+gbp(f.monthly)+' a month, est. · '+f.perk+'</small></div>';
+  }).join('');
 }
 function vcard(v){
   const k=150/v.w, st='height:'+Math.round(v.h*k)+'px;background-size:'+(461*k).toFixed(1)+'px auto;background-position:'+(-v.x*k).toFixed(1)+'px '+(-v.y*k).toFixed(1)+'px';
@@ -450,10 +496,10 @@ function vcard(v){
    +'<span class="vb"><b>'+v.n+'</b><small>'+v.s+'</small>'+(v.fit?'<span class="vfit">'+ico.okI.replace(/width="16" height="16"/,'width="13" height="13"')+v.fit+'</span>':'')+(v.line?'<span class="vp">'+v.line+'</span>':'<span class="vp">From <strong>'+v.p+'</strong> per month</span>')+'</span></button>';
 }
 function routes(){
-  return '<details class="more"><summary>Other options</summary><div class="routes"><p class="hint">Lenders are often more flexible on newer and lower-mileage cars.</p><div class="car-row" role="list">'+VEH.map(vcard).join('')+'</div></div></details>';
+  return '<details class="more" open><summary>Other options</summary><div class="routes"><p class="hint">Lenders are often more flexible on newer and lower-mileage cars.</p><div class="car-row" role="list">'+VEH.map(vcard).join('')+'</div></div></details>';
 }
 function talk(open){
-  return '<details class="talk" '+(open?'open':'')+'><summary>Prefer to talk it through?</summary><div class="talk-b">'
+  return '<details class="talk" open><summary>Prefer to talk it through?</summary><div class="talk-b">'
    +'<p>Your Account Manager can look into this one for you, or help you find something similar.</p>'
    +'<button class="ghost" data-toast="Prototype: this would request a call back.">'+ico.phone+'Call me now</button>'
    +'<button class="ghost" data-toast="Prototype: this would open Carla chat.">'+ico.chat+'Ask Carla about this car</button>'
@@ -489,14 +535,14 @@ function render(){
   else{
     st.innerHTML=ico.block+'Finance unavailable';st.className='status blocked';
     let body;
-    if(S.reason==='min') body='<div class="kicker">Cars over £4,000</div><div class="car-row" role="list">'+VEH_MIN.map(vcard).join('')+'</div>';
-    else if(r.lim) body=limitCard(r.lim)+'<div class="kicker">'+r.kick+'</div><div class="car-row" role="list">'+vehFor(S.reason).map(vcard).join('')+'</div>';
+    if(S.reason==='min') body='<div class="kicker" id="kick">'+kickTxt(r,'min')+'</div><div class="car-row" id="carRow" role="list">'+carsFor('min')+'</div>';
+    else if(r.lim) body='<div class="kicker" id="kick">'+kickTxt(r,S.reason)+'</div><div class="car-row" id="carRow" role="list">'+carsFor(S.reason)+'</div>';
     else if(S.reason==='customer') body='<button class="cta" data-toast="Prototype: this would request a call back.">Call me now</button>'
       +'<button class="ghost" data-toast="Prototype: this would open Carla chat.">'+ico.chat+'Ask Carla</button>'
       +'<button class="ghost" data-toast="Prototype: this would open WhatsApp.">'+ico.chat+'WhatsApp us</button>';
     else body=fixesA(r);
     const nofix=NOFIX.indexOf(S.reason)>=0;
-    h='<details class="whyd"><summary><span class="whyd-t">'+ico.block+'Finance unavailable</span></summary><div class="whyd-b">'+(r.head?'<b>'+r.head+'</b>':'')+'<p>'+r.lead+'</p></div></details><div class="sec"><div class="panel">'+gap(r)+body+'</div></div>'+(nofix?'':routes())+(S.reason==='customer'?'':talk(S.reason==='min'));
+    h='<div class="whyd"><span class="whyd-t">'+ico.block+(S.reason==='customer'?'Finance unavailable':'Finance on this car is unavailable')+'</span></div><div class="sec"><div class="panel">'+gap(r)+body+'</div></div>'+(nofix?'':routes())+(S.reason==='customer'?'':talk(S.reason==='min'));
   }
   const prev=Array.prototype.map.call(document.querySelectorAll('#panelMount details'),function(d){return d.open});
   $('panelMount').innerHTML=h;
@@ -505,7 +551,18 @@ function render(){
   $('viewNote').hidden=S.view!=='current';
   document.querySelectorAll('#segReason button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.reason===S.reason)});
 }
-function reset(keepSel){S.phase='idle';S.done=null;S.mo=0;S.added={deposit:0,budget:0};if(!keepSel)S.sel=-1;}
+document.addEventListener('click',function(e){
+  const s=e.target.closest('.more>summary,.talk>summary');if(s)e.preventDefault();
+});
+document.addEventListener('input',function(e){
+  if(e.target.id!=='slRange')return;
+  const k=S.reason, v=+e.target.value; S.lim[k]=v;
+  $('slider').style.setProperty('--pct',slPct(k,v)+'%');$('slider').style.setProperty('--f',slPct(k,v)/100);
+  $('slBub').textContent=SL[k].lab(v);
+  $('carRow').innerHTML=carsFor(k); $('carRow').scrollLeft=0;
+  $('kick').textContent=kickTxt(DATA[k],k);
+});
+function reset(keepSel){S.lim={age:10,mileage:70000,min:10000};S.phase='idle';S.done=null;S.mo=0;S.added={deposit:0,budget:0};if(!keepSel)S.sel=-1;}
 let tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){t.classList.remove('on')},2200);}
 
 $('segView').innerHTML=Object.keys(VIEWS).map(function(k){return '<button data-view="'+k+'" aria-pressed="false">'+VIEWS[k]+'</button>'}).join('');
@@ -516,11 +573,11 @@ document.addEventListener('click',function(e){
   if(t.dataset.view){S.view=t.dataset.view;reset();}
   else if(t.dataset.reason){S.reason=t.dataset.reason;reset();}
   else if(t.id==='reset'){reset();}
-  else if(t.dataset.sel!==undefined){const i=+t.dataset.sel;S.sel=S.sel===i?-1:i;}
+  else if(t.dataset.fix!==undefined){S.sel=+t.dataset.fix;const f=fixOf();S.phase='loading';render();setTimeout(function(){S.done={fix:f,added:f.need};S.phase='done';render();},1300);return;}
   else if(t.dataset.swap!==undefined){S.sel=S.sel===0?1:0;}
   else if(t.id==='menuBtn'){document.body.classList.add('menu-open');t.setAttribute('aria-expanded','true');return;}
   else if(t.id==='menuClose'){document.body.classList.remove('menu-open');document.getElementById('menuBtn').setAttribute('aria-expanded','false');return;}
-  else if(t.dataset.undo!==undefined){reset(true);}
+  else if(t.dataset.undo!==undefined){reset();}
   else if(t.dataset.apply!==undefined){
     const f=fixOf();const added=f.need;
     S.phase='loading';render();
